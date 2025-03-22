@@ -125,6 +125,25 @@ function linkedList() {
       result += "null";
       return result;
     },
+    insertAt: (value, index) => {
+      if ((index <= 0) | (_head === null)) {
+        let temp = _head;
+        _head = node(value, temp);
+
+        return;
+      }
+
+      let nextIndex = 1;
+      let currentNode = _head;
+
+      while ((currentNode.nextNode !== null) & (nextIndex !== index)) {
+        currentNode = currentNode.nextNode;
+        nextIndex += 1;
+      }
+
+      let nextNode = currentNode.nextNode;
+      currentNode.nextNode = node(value, nextNode);
+    },
   };
 }
 

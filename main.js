@@ -29,7 +29,7 @@ function showInstructions() {
   console.log("\t[7] Pop an item off the list.");
   console.log("\t[8] Check if the list contains a value.");
   console.log("\t[9] Get the index of a value.");
-  console.log("\t[10] Print the list.");
+  console.log("\t[10] Insert a value at index.");
   console.log("\t[Q] Quit");
   console.log("\t[?] Show these instructions again.");
 }
@@ -98,7 +98,7 @@ async function handleUserInput() {
         await getIndex();
         break;
       case "10":
-        console.log(list.toString());
+        list.insertAt(await prompt("Value: "), +(await prompt("Index: ")));
         break;
       case "Q":
         done = true;
@@ -115,6 +115,7 @@ async function handleUserInput() {
           done = true;
         }
     }
+    console.log(list.toString());
   }
 }
 
