@@ -144,6 +144,30 @@ function linkedList() {
       let nextNode = currentNode.nextNode;
       currentNode.nextNode = node(value, nextNode);
     },
+    removeAt: (index) => {
+      if ((index < 0) | (_head === null)) {
+        return;
+      }
+
+      if (index === 0) {
+        _head = _head.nextNode;
+        return;
+      }
+
+      let previous = _head;
+      let current = previous.nextNode;
+      let currentIndex = 1;
+
+      while ((current !== null) & (currentIndex < index)) {
+        previous = current;
+        current = current.nextNode;
+        currentIndex += 1;
+      }
+
+      if (current !== null) {
+        previous.nextNode = current.nextNode;
+      }
+    },
   };
 }
 

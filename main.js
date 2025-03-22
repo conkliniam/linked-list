@@ -30,6 +30,7 @@ function showInstructions() {
   console.log("\t[8] Check if the list contains a value.");
   console.log("\t[9] Get the index of a value.");
   console.log("\t[10] Insert a value at index.");
+  console.log("\t[11] Remove at index.");
   console.log("\t[Q] Quit");
   console.log("\t[?] Show these instructions again.");
 }
@@ -51,13 +52,13 @@ async function handleUserInput() {
   let invalidCount = 0;
 
   async function search() {
-    let value = await prompt("What value do you want to look for? ");
+    let value = await prompt("Value: ");
     let result = list.contains(value);
-    console.log(`The list does${result ? "" : " not"} contain: ${value}`);
+    console.log(`${value} ${result ? "" : "not "}found`);
   }
 
   async function getIndex() {
-    let value = await prompt("What value do you want to look for? ");
+    let value = await prompt("Value: ");
     let index = list.find(value);
     if (index !== null) {
       console.log(`${value} is at index ${index}`);
@@ -67,13 +68,13 @@ async function handleUserInput() {
   }
 
   while (!done) {
-    input = await prompt("Enter an option: ");
+    input = await prompt("> ");
     switch (input) {
       case "1":
-        list.append(await prompt(`Enter a value to append: `));
+        list.append(await prompt("Value: "));
         break;
       case "2":
-        list.prepend(await prompt("Enter a value to prepend: "));
+        list.prepend(await prompt("Value: "));
         break;
       case "3":
         console.log(list.size());
@@ -85,10 +86,9 @@ async function handleUserInput() {
         printItem(list.tail());
         break;
       case "6":
-        printItem(list.at(+(await prompt("Enter an index: "))));
+        printItem(list.at(+(await prompt("Index: "))));
         break;
       case "7":
-        console.log("Popping...");
         list.pop();
         break;
       case "8":
@@ -100,6 +100,9 @@ async function handleUserInput() {
       case "10":
         list.insertAt(await prompt("Value: "), +(await prompt("Index: ")));
         break;
+      case "11":
+        list.removeAt(+(await prompt("Index: ")));
+        break;
       case "Q":
         done = true;
         break;
@@ -107,7 +110,7 @@ async function handleUserInput() {
         showInstructions();
         break;
       default:
-        console.log("Invalid input, try again:");
+        console.log("Invalid input, try again");
         invalidCount += 1;
 
         if (invalidCount > 10) {
